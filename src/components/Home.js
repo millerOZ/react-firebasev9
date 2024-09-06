@@ -28,15 +28,15 @@ const Home = ({ email }) => {
         setUser({ ...user, [name]: value });
     };
     const saveData = async (e) => {
-        e.preventDefault();
-
+        e.preventDefault();// evitar que recarge la pagina
+        
         if(subId === ''){
             try {
                 await addDoc(collection(db, "users"), { ...user });
             } catch (error) {
                 console.log(error);
             }
-        }else {
+        }else { 
             await setDoc(doc(db,'users',subId),{
                 ...user
             })
@@ -55,12 +55,12 @@ const Home = ({ email }) => {
                     docs.push({ ...doc.data(), id: doc.id })
                 })
                 setList(docs)
-            } catch (error) {
+            } catch (error) {   
                 console.log(error);
             }
         }
         getLista()
-    }, [ ])
+    }, [lista])
 
     //delete user
     const deleteUser = async (id) => {
